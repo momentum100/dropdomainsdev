@@ -43,7 +43,7 @@ if ($_POST['submit']) {
 
         $domainList = substr($domainList, 0, -1);
 
-        echo "certbot --no-redirect --expand  --register-unsafely-without-email -d $domainList". $n.$n;
+        echo "certbot --no-redirect --apache --register-unsafely-without-email -d $domainList". $n.$n;
         
 	print_r($domains);
 }
@@ -66,7 +66,7 @@ if ($handle = opendir('/var/www/donors/')) {
 </select>
 <br>
 server IP: <input type=text name=ip value="<?php readfile("http://169.254.169.254/metadata/v1/interfaces/public/0/ipv4/address"); ?>"><br>
-API key:  <input type=text name=api value="b71dfadf8a93d3e95deeba2703149aab0dfe8a773c4d91b6bb3728986e63dc1e"><br>
+API key:  <input type=text name=api value="APIKEYHERE"><br>
 <br>
 <!-- <input type=text name=donorDir value="/var/www/donors/finance"><br> -->
 <br>
