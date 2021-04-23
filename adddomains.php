@@ -26,27 +26,14 @@ if ($_POST['submit']) {
         // CHECK DOMAIN VALIDITY
         $serverIP = file_get_contents("http://169.254.169.254/metadata/v1/interfaces/public/0/ipv4/address");
 
- if ($handle = opendir('/var/www/')) {
-     while (false !== ($entry = readdir($handle))) {
-         if ($entry != "." && $entry != "..") {
-
-             if(gethostbyname($entry) == $serverIP) {
-                 echo ($k++). " ". $entry . " ". gethostbyname($entry). "<br>\n";
-                 $domainList[] = $entry;
-             } else {
-                 echo "ERROR". $entry ."\n";
-             }
-         }
-     }
-     closedir($handle);
- }
-
 		//certbot commands
-		for ($k=0; $k< count($domainList); $k++) {
-			echo "certbot certonly -n --no-redirect --apache --register-unsafely-without-email -d $domain -w /var/www/$domain". $n.$n;
-        }
+       for ($k=0; $k< count($domainList); $k++) {
+                echo "certbot certonly -n --no-redirect --apache --register-unsafely-without-email -d ".$domainList[$k]." -w /var/www/".$domainList[$k] . $n.$n;
+
+       }
+
 		
-	print_r($domains);
+	//print_r($domains);
 }
 ?>
 
