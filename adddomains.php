@@ -32,7 +32,7 @@ if ($_POST['submit']) {
 
              if(gethostbyname($entry) == $serverIP) {
                  echo ($k++). " ". $entry . " ". gethostbyname($entry). "<br>\n";
-                 $domainList .= $entry . ",";
+                 $domainList[] = $entry;
              } else {
                  echo "ERROR". $entry ."\n";
              }
@@ -41,10 +41,11 @@ if ($_POST['submit']) {
      closedir($handle);
  }
 
-        $domainList = substr($domainList, 0, -1);
-
-        echo "certbot --no-redirect --apache --register-unsafely-without-email -d $domainList". $n.$n;
-        
+		//certbot commands
+		for ($k=0; $k< count($domainList); $k++) {
+			echo "certbot certonly -n --no-redirect --apache --register-unsafely-without-email -d $domain -w /var/www/$domain". $n.$n;
+        }
+		
 	print_r($domains);
 }
 ?>
