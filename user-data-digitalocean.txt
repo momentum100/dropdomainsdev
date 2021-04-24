@@ -7,6 +7,7 @@ apt-get -y install php libapache2-mod-php php-curl php-mysqli
 apt install -y net-tools
 apt -y install net-tools
 apt -y install unzip
+apt-get -y install parallel
 
 wget http://baraset.com/def.conf -O- >/root/def.conf
 
@@ -19,15 +20,17 @@ ln -s /etc/apache2/mods-available/vhost_alias.load /etc/apache2/mods-enabled/vho
 export PUBLIC_IPV4=$(curl -s http://169.254.169.254/metadata/v1/interfaces/public/0/ipv4/address)
 ip3=$(echo $PUBLIC_IPV4 | awk -F. '{print $3}')
 ip4=$(echo $PUBLIC_IPV4 | awk -F. '{print $4}')
-mkdir /var/www/$ip3.$ip4
 
+mkdir /var/www
+mkdir /var/www/$ip3.$ip4
+cd /var/www/$ip3.$ip4
 git clone https://github.com/momentum100/dropdomainsdev
 
+
 mkdir /var/www/donors
-mkdir /var/www/donors/finance
-mkdir /var/www/donors/keto
 chown -R www-data:www-data /var/www
 
 apt install -y certbot python3-certbot-apache
 
+a2enmod ssl
 apachectl restart
