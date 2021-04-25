@@ -8,6 +8,7 @@ apt install -y net-tools
 apt -y install net-tools
 apt -y install unzip
 apt-get -y install parallel
+apt -y install whois
 
 wget http://baraset.com/def.conf -O- >/root/def.conf
 
