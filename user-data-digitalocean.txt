@@ -10,8 +10,21 @@ apt -y install unzip
 apt-get -y install parallel
 apt -y install whois
 
-wget http://baraset.com/def.conf -O- >/root/def.conf
 
+echo "<VirtualHost *:80>
+    UseCanonicalName Off
+    VirtualDocumentRoot "/var/www/%-2.0.%-1.0"
+    VirtualScriptAlias "/var/www/%-2.0.%-1.0/cgi-bin/"
+    <Directory /var/www/*>
+        Options FollowSymLinks
+        AllowOverride All
+        Require all granted
+        DirectoryIndex index.php index.html
+    </Directory>
+    ErrorLog /var/log/apache2/domains-err.log
+    CustomLog /var/log/apache2/domains-acc.log common
+</VirtualHost>
+"  > /root/def.conf
 
 mv /etc/apache2/sites-enabled/000-default.conf /root/000-default.conf.bak
 mv /root/def.conf /etc/apache2/sites-enabled/000-default.conf
