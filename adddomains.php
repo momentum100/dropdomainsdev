@@ -41,15 +41,8 @@ if ($_POST['submit']) {
 			echo "https://". $domain . $n;
 		}
 	}
-		//certbot commands
-       for ($k=0; $k< count($domainList); $k++) {
-                echo "certbot certonly -n --no-redirect --apache --register-unsafely-without-email -d ".$domainList[$k]." -w /var/www/".$domainList[$k] . $n.$n;
 
-       }
-
-		
 	//print_r($domains);
-	
 }
 ?>
 
