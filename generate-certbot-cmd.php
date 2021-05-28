@@ -18,5 +18,3 @@ if ($handle = opendir('/var/www/')) {
 
 echo $i;
 closedir($handle);
-
-
